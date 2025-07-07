@@ -36,6 +36,17 @@ const router = createBrowserRouter([
             { path: "my-reviews", element: <MyReviews /> }
         ]
     },
+    {
+        path: "/dashboard/moderator",
+        element: <PrivateRoute><ModeratorDashboard /></PrivateRoute>,
+        children: [
+            { path: "profile", element: <ModeratorProfile /> },
+            { path: "add-scholarship", element: <AddScholarship /> },
+            { path: "manage-scholarships", element: <ManageScholarships /> },
+            { path: "all-reviews", element: <AllReviews /> },
+            { path: "all-applications", element: <AllApplications /> }
+        ]
+    },
 
   { path: "*", element: <NotFound /> }
 ]);
