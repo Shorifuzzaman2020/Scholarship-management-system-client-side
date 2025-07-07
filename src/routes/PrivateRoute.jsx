@@ -7,6 +7,7 @@ const PrivateRoute = ({ children }) => {
   if (loading) return <p className="text-center mt-10">Loading...</p>;
   if (user) return children;
   return <Navigate to="/login" />;
+  
 };
 
 export default PrivateRoute;
