@@ -11,22 +11,32 @@ import MainLayout from "../Layout/MainLayout";
 import DashboardLayout from "../Layout/DashboardLayout";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainLayout/>,
-    children: [
-      { path: "/", element: <Home /> },
-      { path: "/login", element: <Login /> },
-      { path: "/register", element: <Register /> }
-    ]
-  },
-  {
-    path: "/dashboard",
-    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
-    children: [
-      { path: "user", element: <UserDashboard /> }
-    ]
-  },
+    {
+        path: "/",
+        element: <MainLayout />,
+        children: [
+            { path: "/", element: <Home /> },
+            { path: "/login", element: <Login /> },
+            { path: "/register", element: <Register /> }
+        ]
+    },
+    {
+        path: "/dashboard",
+        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+        children: [
+            { path: "user", element: <UserDashboard /> }
+        ]
+    },
+    {
+        path: "/dashboard/user",
+        element: <PrivateRoute><UserDashboard /></PrivateRoute>,
+        children: [
+            { path: "profile", element: <UserProfile /> },
+            { path: "my-applications", element: <MyApplications /> },
+            { path: "my-reviews", element: <MyReviews /> }
+        ]
+    },
+
   { path: "*", element: <NotFound /> }
 ]);
 
