@@ -5,7 +5,7 @@ const AllReviews = () => {
   const { data: reviews = [], refetch } = useQuery({
     queryKey: ["all-reviews"],
     queryFn: async () => {
-      const res = await fetch("https://your-server.com/reviews");
+      const res = await fetch("http://localhost:5000/reviews");
       return res.json();
     },
   });
@@ -20,7 +20,7 @@ const AllReviews = () => {
     });
 
     if (confirm.isConfirmed) {
-      const res = await fetch(`https://your-server.com/reviews/${id}`, {
+      const res = await fetch(`http://localhost:5000/reviews/${id}`, {
         method: "DELETE",
       });
       const result = await res.json();

@@ -1,15 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+
+
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { useUser } from "../../../contexts/AuthProvider";
 
 const MyApplications = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useUser();
 
   const { data: apps = [], refetch } = useQuery({
     queryKey: ["my-applications", user?.email],
     queryFn: async () => {
-      const res = await fetch(`https://your-server.com/applications/user/${user?.email}`);
+      const res = await fetch(`http://localhost:5000/applications/user/${user?.email}`);
       return res.json();
     }
   });
@@ -22,7 +24,7 @@ const MyApplications = () => {
     });
 
     if (confirm.isConfirmed) {
-      const res = await fetch(`https://your-server.com/applications/${id}`, {
+      const res = await fetch(`http://localhost:5000/applications/${id}`, {
         method: "DELETE"
       });
       const result = await res.json();

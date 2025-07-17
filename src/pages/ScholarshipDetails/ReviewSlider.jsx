@@ -6,7 +6,7 @@ const ReviewSlider = ({ scholarshipId }) => {
   const { data: reviews = [], isLoading } = useQuery({
     queryKey: ['reviews', scholarshipId],
     queryFn: async () => {
-      const res = await fetch(`https://your-server.com/reviews/${scholarshipId}`);
+      const res = await fetch(`http://localhost:5000/reviews/${scholarshipId}`);
       return res.json();
     }
   });

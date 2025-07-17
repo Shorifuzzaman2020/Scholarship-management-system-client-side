@@ -5,13 +5,13 @@ const ManageUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("https://your-server.com/users");
+      const res = await fetch("http://localhost:5000/users");
       return res.json();
     },
   });
 
   const handleRoleChange = async (id, role) => {
-    const res = await fetch(`https://your-server.com/users/role/${id}`, {
+    const res = await fetch(`http://localhost:5000/users/role/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ role }),
@@ -32,7 +32,7 @@ const ManageUsers = () => {
     });
 
     if (confirm.isConfirmed) {
-      const res = await fetch(`https://your-server.com/users/${id}`, {
+      const res = await fetch(`http://localhost:5000/users/${id}`, {
         method: "DELETE",
       });
       const data = await res.json();

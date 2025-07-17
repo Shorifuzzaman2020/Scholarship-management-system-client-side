@@ -11,7 +11,7 @@ const AnalyticsPage = () => {
   const { data: analytics = {}, isLoading } = useQuery({
     queryKey: ["analytics"],
     queryFn: async () => {
-      const res = await fetch("https://your-server.com/analytics");
+      const res = await fetch("http://localhost:5000/analytics");
       return res.json();
     },
   });

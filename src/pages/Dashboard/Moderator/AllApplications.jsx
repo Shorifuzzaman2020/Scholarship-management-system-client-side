@@ -1,20 +1,20 @@
+
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import { useState } from "react";
-import { useState, useEffect } from "react";
 
 // NEW STATE
-const [statusFilter, setStatusFilter] = useState("All");
-const [sortOrder, setSortOrder] = useState("Newest");
-const [filteredApps, setFilteredApps] = useState([]);
 
 const AllApplications = () => {
     const [selectedApp, setSelectedApp] = useState(null);
+    const [statusFilter, setStatusFilter] = useState("All");
+    const [sortOrder, setSortOrder] = useState("Newest");
+    const [filteredApps, setFilteredApps] = useState([]);
 
     const { data: applications = [], refetch } = useQuery({
         queryKey: ["all-applications"],
         queryFn: async () => {
-            const res = await fetch("https://your-server.com/applications");
+            const res = await fetch("http://localhost:5000/applications");
             return res.json();
         },
     });
@@ -39,7 +39,7 @@ const AllApplications = () => {
     }, [applications, statusFilter, sortOrder]);
 
     const handleStatusUpdate = async (id, newStatus) => {
-        const res = await fetch(`https://your-server.com/applications/status/${id}`, {
+        const res = await fetch(`http://localhost:5000/applications/status/${id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: newStatus }),
@@ -70,7 +70,7 @@ const AllApplications = () => {
         const feedback = e.target.feedback.value;
         const id = selectedApp?._id;
 
-        const res = await fetch(`https://your-server.com/applications/feedback/${id}`, {
+        const res = await fetch(`http://localhost:5000/applications/feedback/${id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ feedback }),

@@ -1,42 +1,68 @@
-import { useParams } from "react-router-dom";
+
+
+import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import ReviewSlider from "./ReviewSlider";
 
 const ScholarshipDetails = () => {
   const { id } = useParams();
 
-  const { data: scholarship, isLoading } = useQuery({
+  const {
+    data: scholarship,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ['scholarship', id],
     queryFn: async () => {
-      const res = await axios.get(`https://your-server.com/scholarships/${id}`);
+      const res = await axios.get(`http://localhost:5000/scholarships/${id}`);
       return res.data;
-    }
+    },
   });
 
-  if (isLoading) return <p className="text-center">Loading...</p>;
+  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  if (isError) return <p className="text-center text-red-600 mt-10">Error: {error.message}</p>;
 
   const {
-    universityName, universityLogo, scholarshipCategory, location, subjectCategory,
-    applicationDeadline, description, stipend, postDate, applicationFees, serviceCharge
-  } = scholarship;
+    universityName,
+    universityImage,
+    scholarshipName,
+    scholarshipCategory,
+    subjectCategory,
+    deadline,
+    tuitionFees,
+    applicationFees,
+    serviceCharge,
+    stipend,
+    postDate,
+    universityCity,
+    universityCountry,
+    description,
+  } = scholarship || {};
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-6">
-      <img src={universityLogo} alt="logo" className="w-32 mb-4" />
-      <h2 className="text-2xl font-bold">{universityName}</h2>
-      <p>{location.city}, {location.country}</p>
-      <p className="my-2"><strong>Subject:</strong> {subjectCategory}</p>
-      <p><strong>Deadline:</strong> {applicationDeadline}</p>
-      <p><strong>Fees:</strong> ${applicationFees}</p>
+      <img src={universityImage} alt="University Logo" className="w-32 mx-auto mb-4" />
+      <h2 className="text-2xl font-bold">{universityName || "Unknown University"}</h2>
+      <p className="text-gray-600">{universityCity}, {universityCountry}</p>
+
+      <p className="my-2"><strong>Scholarship:</strong> {scholarshipName}</p>
+      <p><strong>Category:</strong> {scholarshipCategory}</p>
+      <p><strong>Subject:</strong> {subjectCategory}</p>
+      <p><strong>Degree:</strong> {scholarship.degree}</p>
+      <p><strong>Application Deadline:</strong> {deadline}</p>
+      <p><strong>Tuition Fees:</strong> {tuitionFees ? `$${tuitionFees}` : "Not mentioned"}</p>
+      <p><strong>Application Fees:</strong> ${applicationFees}</p>
       <p><strong>Service Charge:</strong> ${serviceCharge}</p>
       {stipend && <p><strong>Stipend:</strong> ${stipend}</p>}
-      <p className="mt-4">{description}</p>
+      <p className="mt-4">{description || "No additional information available."}</p>
       <p className="mt-2 text-sm text-gray-600">Posted on: {postDate}</p>
 
       <div className="mt-6">
-        <Link to={`/apply/${id}`} className="btn btn-primary">Apply Scholarship</Link>
+        <Link to={`/apply/${id}`} className="btn btn-primary">
+          Apply Scholarship
+        </Link>
       </div>
 
       <div className="mt-10">

@@ -1,15 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+
+
 import Swal from "sweetalert2";
 
+import { useUser } from "../../../contexts/AuthProvider";
+
 const MyReviews = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useUser();
 
   const { data: reviews = [], refetch } = useQuery({
     queryKey: ["my-reviews", user?.email],
     queryFn: async () => {
-      const res = await fetch(`https://your-server.com/reviews/user/${user?.email}`);
+      const res = await fetch(`http://localhost:5000/reviews/user/${user?.email}`);
       return res.json();
     }
   });
@@ -22,7 +24,7 @@ const MyReviews = () => {
     });
 
     if (confirm.isConfirmed) {
-      const res = await fetch(`https://your-server.com/reviews/${id}`, {
+      const res = await fetch(`http://localhost:5000/reviews/${id}`, {
         method: "DELETE"
       });
       const result = await res.json();

@@ -1,53 +1,107 @@
+
 import { createBrowserRouter } from "react-router-dom";
 
-import Home from "../pages/Home/Home";
-import Login from "../pages/Auth/Login";
-import Register from "../pages/Auth/Register";
-import PrivateRoute from "../components/Shared/PrivateRoute";
-
-import UserDashboard from "../pages/Dashboard/User/UserDashboard";
-import NotFound from "../pages/NotFound";
+// Layouts
 import MainLayout from "../Layout/MainLayout";
 import DashboardLayout from "../Layout/DashboardLayout";
 
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <MainLayout />,
-        children: [
-            { path: "/", element: <Home /> },
-            { path: "/login", element: <Login /> },
-            { path: "/register", element: <Register /> }
-        ]
-    },
-    {
-        path: "/dashboard",
-        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
-        children: [
-            { path: "user", element: <UserDashboard /> }
-        ]
-    },
-    {
-        path: "/dashboard/user",
-        element: <PrivateRoute><UserDashboard /></PrivateRoute>,
-        children: [
-            { path: "profile", element: <UserProfile /> },
-            { path: "my-applications", element: <MyApplications /> },
-            { path: "my-reviews", element: <MyReviews /> }
-        ]
-    },
-    {
-        path: "/dashboard/moderator",
-        element: <PrivateRoute><ModeratorDashboard /></PrivateRoute>,
-        children: [
-            { path: "profile", element: <ModeratorProfile /> },
-            { path: "add-scholarship", element: <AddScholarship /> },
-            { path: "manage-scholarships", element: <ManageScholarships /> },
-            { path: "all-reviews", element: <AllReviews /> },
-            { path: "all-applications", element: <AllApplications /> }
-        ]
-    },
+// Public Pages
+import Home from "../pages/Home/Home";
+import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
+import NotFound from "../pages/NotFound";
 
+// Auth / Protected Routes
+import PrivateRoute from "../components/Shared/PrivateRoute";
+import AdminRoute from "../components/Shared/AdminRoute";
+import ModeratorRoute from "../components/Shared/ModeratorRoute";
+
+// User Dashboard Pages
+import UserDashboard from "../pages/Dashboard/User/UserDashboard";
+import UserProfile from "../pages/Dashboard/User/UserProfile";
+import MyApplications from "../pages/Dashboard/User/MyApplications";
+import MyReviews from "../pages/Dashboard/User/MyReviews";
+
+// Moderator Dashboard Pages
+import ModeratorDashboard from "../pages/Dashboard/Moderator/ModeratorDashboard";
+import ModeratorProfile from "../pages/Dashboard/Moderator/ModeratorProfile";
+import AddScholarship from "../pages/Dashboard/Moderator/AddScholarship";
+import ManageScholarships from "../pages/Dashboard/Moderator/ManageScholarships";
+import AllReviews from "../pages/Dashboard/Moderator/AllReviews";
+import AllApplications from "../pages/Dashboard/Moderator/AllApplications";
+
+// Admin Dashboard Pages
+import AdminDashboard from "../pages/Dashboard/Admin/AdminDashboard";
+import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
+import AdminAddScholarship from "../pages/Dashboard/Admin/AdminAddScholarship";
+import AdminManageScholarship from "../pages/Dashboard/Admin/AdminManageScholarship";
+import AdminManageApplication from "../pages/Dashboard/Admin/AdminManageApplication";
+import AdminManageReview from "../pages/Dashboard/Admin/AdminManageReview";
+import AdminAnalytics from "../pages/Dashboard/Admin/AdminAnalytics";
+
+// Scholarship Routes
+
+
+import ScholarshipDetails from "../pages/ScholarshipDetails/ScholarshipDetails";
+import AllScholarships from "../pages/AllScholarships/AllScholarships";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Register /> },
+      { path: "/scholarships/:id", element: <PrivateRoute><ScholarshipDetails /></PrivateRoute> },
+      { path: "/scholarships", element: <AllScholarships/> },
+    ]
+  },
+
+  // USER DASHBOARD
+  {
+    path: "/dashboard/user",
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+    children: [
+      { path: "", element: <UserDashboard /> },
+      { path: "profile", element: <UserProfile /> },
+      { path: "my-applications", element: <MyApplications /> },
+      { path: "my-reviews", element: <MyReviews /> },
+    ]
+  },
+
+  // MODERATOR DASHBOARD
+  {
+    path: "/dashboard/moderator",
+    element: <ModeratorRoute><DashboardLayout /></ModeratorRoute>,
+    children: [
+      { path: "", element: <ModeratorDashboard /> },
+      { path: "profile", element: <ModeratorProfile /> },
+      { path: "add-scholarship", element: <AddScholarship /> },
+      { path: "manage-scholarships", element: <ManageScholarships /> },
+      { path: "all-reviews", element: <AllReviews /> },
+      { path: "all-applications", element: <AllApplications /> },
+    ]
+  },
+
+  // ADMIN DASHBOARD
+  {
+    path: "/dashboard/admin",
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+    children: [
+      { path: "", element: <AdminDashboard /> },
+      { path: "profile", element: <AdminProfile /> },
+      { path: "add-scholarship", element: <AdminAddScholarship /> },
+      { path: "manage-scholarship", element: <AdminManageScholarship /> },
+      { path: "manage-applications", element: <AdminManageApplication /> },
+      { path: "manage-users", element: <ManageUsers /> },
+      { path: "manage-reviews", element: <AdminManageReview /> },
+      { path: "analytics", element: <AdminAnalytics /> },
+    ]
+  },
+
+  // 404
   { path: "*", element: <NotFound /> }
 ]);
 

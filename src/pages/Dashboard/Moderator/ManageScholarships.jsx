@@ -5,7 +5,7 @@ const ManageScholarships = () => {
   const { data: scholarships = [], refetch } = useQuery({
     queryKey: ["manage-scholarships"],
     queryFn: async () => {
-      const res = await fetch("https://your-server.com/scholarships");
+      const res = await fetch("http://localhost:5000/scholarships");
       return res.json();
     },
   });
@@ -20,7 +20,7 @@ const ManageScholarships = () => {
     });
 
     if (confirm.isConfirmed) {
-      const res = await fetch(`https://your-server.com/scholarships/${id}`, {
+      const res = await fetch(`http://localhost:5000/scholarships/${id}`, {
         method: "DELETE",
       });
       const result = await res.json();
@@ -76,7 +76,7 @@ const ManageScholarships = () => {
                         degree: e.target.degree.value,
                       };
 
-                      fetch(`https://your-server.com/scholarships/${s._id}`, {
+                      fetch(`http://localhost:5000/scholarships/${s._id}`, {
                         method: "PATCH",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(updatedData),

@@ -1,8 +1,10 @@
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+
+import { AuthContext } from "../../../contexts/AuthContext";
+import { useUser } from "../../../contexts/AuthProvider";
+
 
 const UserProfile = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useUser();
 
   return (
     <div className="max-w-lg mx-auto bg-white p-6 shadow rounded">
