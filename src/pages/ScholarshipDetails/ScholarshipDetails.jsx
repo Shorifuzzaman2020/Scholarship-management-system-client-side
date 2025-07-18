@@ -60,7 +60,7 @@ const ScholarshipDetails = () => {
       <p className="mt-2 text-sm text-gray-600">Posted on: {postDate}</p>
 
       <div className="mt-6">
-        <Link to={`/apply/${id}`} className="btn btn-primary">
+        <Link to={`/dashboard/user/apply/${id}`} className="btn btn-primary">
           Apply Scholarship
         </Link>
       </div>

@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "https://your-server.com",
+  baseURL: "http://localhost:5000/",
 });
 
 axiosSecure.interceptors.request.use((config) => {

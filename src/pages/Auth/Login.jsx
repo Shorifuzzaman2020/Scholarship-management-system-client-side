@@ -19,26 +19,7 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // const saveUserToDatabase = async (user) => {
-  //   const userData = {
-  //     uid: user.uid,
-  //     displayName: user.displayName || "Anonymous",
-  //     email: user.email,
-  //     photoURL: user.photoURL || "",
-  //     role: "general",
-  //   };
-
-  //   try {
-  //     await axios.post("http://localhost:5000/users", userData, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     console.log("User data saved to MongoDB.");
-  //   } catch (err) {
-  //     console.error("Error saving user to DB:", err);
-  //   }
-  // };
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -52,7 +33,6 @@ const Login = () => {
       );
       const currentUser = userCredential.user;
 
-      // await saveUserToDatabase(currentUser);
 
       const jwtRes = await axios.post("http://localhost:5000/jwt", {
         email: currentUser.email,

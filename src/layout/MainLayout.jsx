@@ -11,7 +11,7 @@ const MainLayout = () => {
     <>
       <Navbar />
       <main className="min-h-screen">
-        <Outlet /> {/* ✅ This is where page content renders */}
+        <Outlet /> 
       </main>
       <Footer />
     </>

@@ -1,3 +1,5 @@
+
+
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
@@ -24,43 +26,52 @@ const AllReviews = () => {
         method: "DELETE",
       });
       const result = await res.json();
+
       if (result.deletedCount > 0) {
         Swal.fire("Deleted!", "Review has been removed.", "success");
         refetch();
+      } else {
+        Swal.fire("Error!", "Failed to delete the review.", "error");
       }
     }
   };
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">⭐ All Reviews</h2>
+      <h2 className="text-xl font-bold mb-6">⭐ All Reviews</h2>
 
       {reviews.length === 0 ? (
-        <p>No reviews available.</p>
+        <p className="text-center text-gray-500">No reviews available.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {reviews.map((r) => (
-            <div key={r._id} className="card bg-base-100 shadow">
+            <div key={r._id} className="card bg-white shadow-md border">
               <div className="card-body">
-                <div className="flex items-center gap-3 mb-2">
-                  <img
-                    src={r.reviewerImage || "/default-avatar.png"}
-                    alt={r.reviewerName}
-                    className="w-10 h-10 rounded-full"
-                  />
+                <div className=" gap-3 mb-3">
+                  <div className="flex justify-center mb-3">
+                    <img
+                      src={r.reviewerImage || "/default-avatar.png"}
+                      alt={r.reviewerName}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                  </div>
+
                   <div>
-                    <p className="font-semibold">{r.reviewerName}</p>
-                    <p className="text-xs text-gray-500">{r.reviewDate}</p>
+                    <p className="font-semibold mb-3"><strong>Reviwer Name: </strong>{r.reviewerName}</p>
+                    <p className="text-xs text-gray-500"><strong>Review Date: </strong>{r.reviewDate}</p>
                   </div>
                 </div>
 
-                <h3 className="text-md font-bold">{r.scholarshipName}</h3>
-                <p className="text-sm text-gray-600">{r.universityName}</p>
-                <p className="text-sm text-blue-600">{r.subjectCategory}</p>
-                <p className="my-2">{r.comment}</p>
-                <p className="text-yellow-500">⭐ {r.rating}/5</p>
+                <div className="mb-2">
+                  <h3 className="text-md font-bold text-blue-600">Email: {r.userEmail}</h3>
+                  <p className="text-sm font-medium">{r.universityName}</p>
+                  <p className="text-sm text-gray-500">{r.subjectCategory}</p>
+                </div>
 
-                <div className="card-actions justify-end mt-2">
+                <p className=" text-gray-700"><strong>Comment:</strong> {r.reviewText}</p>
+                <p className="text-yellow-500 font-medium">⭐ {r.rating}/5</p>
+
+                <div className="card-actions justify-end mt-4">
                   <button
                     className="btn btn-xs btn-error"
                     onClick={() => handleDelete(r._id)}

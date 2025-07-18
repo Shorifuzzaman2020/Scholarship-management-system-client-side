@@ -5,10 +5,11 @@ import { useQuery } from "@tanstack/react-query";
 
 import axiosSecure from "../../../utils/axiosSecure";
 import Loading from "./Loading";
-import useAuth from "../../hooks/useAuth";
+
+import { useUser } from "../../contexts/AuthProvider";
 
 const ModeratorRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, loading } = useUser();
   const location = useLocation();
 
   const { data: isModerator, isLoading } = useQuery({
