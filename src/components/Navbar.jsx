@@ -48,7 +48,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-green-400 text-white p-4 flex items-center justify-between relative">
+        <nav className="bg-green-700 text-white p-4 flex items-center justify-between relative">
             <div className="text-xl font-bold flex gap-4">
                 <div>
                     <img className='h-8 w-8' src="https://i.ibb.co/0ykxLfXd/student-graduation-cap-with-gold-tassel-ribbon-107791-16542.jpg" alt="" />
@@ -79,7 +79,7 @@ const Navbar = () => {
                     <div className="flex items-center space-x-2">
                         <button
                             onClick={() => handleRedirect(getDashboardPath())}
-                            className="bg-blue-500 text-white p-2 rounded"
+                            className="bg-white text-green-700 p-2 rounded"
                         >
                             {getDashboardLabel()}
                         </button>

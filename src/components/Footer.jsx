@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Logo & About */}
         <div>
-          <h2 className="text-xl font-bold text-white mb-3">ScholarHub</h2>
+          <h2 className="text-xl font-bold text-white mb-3">GlobalScholarHub</h2>
           <p className="text-sm">
             Your trusted platform for exploring global scholarships and
             empowering education.

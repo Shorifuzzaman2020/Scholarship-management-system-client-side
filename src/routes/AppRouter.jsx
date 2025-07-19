@@ -47,6 +47,7 @@ import ScholarshipDetails from "../pages/ScholarshipDetails/ScholarshipDetails";
 import AllScholarships from "../pages/AllScholarships/AllScholarships";
 import ApplyScholarship from "../pages/Apply/ApplyScholarship";
 import AnalyticsPage from "../pages/Dashboard/Admin/AnalyticsPage";
+import OfficeAddress from "../pages/Home/OfficeAddress";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/scholarships/:id", element: <PrivateRoute><ScholarshipDetails /></PrivateRoute> },
       { path: "/scholarships", element: <AllScholarships /> },
+      {path: "/our-office",element: <OfficeAddress/>},
     ]
   },
 
@@ -118,7 +120,7 @@ const router = createBrowserRouter([
       }
     ]
   },
-
+  
 
   // 404
   { path: "*", element: <NotFound /> }
