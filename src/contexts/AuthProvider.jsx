@@ -1,4 +1,5 @@
 
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   onAuthStateChanged,
@@ -25,46 +26,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('isLoggedIn', isLoggedIn);
   }, [isLoggedIn]);
 
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-  //     setLoading(true);
-  //     if (currentUser && isLoggedIn) {
-  //       setUser(currentUser);
-
-  //       // Prepare user data for the DB
-  //       const userData = {
-  //         uid: currentUser.uid,
-  //         displayName: currentUser.displayName || 'Anonymous',
-  //         email: currentUser.email,
-  //         photoURL: currentUser.photoURL || '',
-  //         role: "general",
-  //       };
-
-  //       try {
-  //         // Save user to DB
-  //         await axios.post("http://localhost:5000/users", userData, {
-  //           headers: { 'Content-Type': 'application/json' }
-  //         });
-
-  //         // Get JWT
-  //         const jwtRes = await axios.post("http://localhost:5000/jwt", {
-  //           email: currentUser.email
-  //         });
-
-  //         localStorage.setItem("access-token", jwtRes.data.token);
-  //       } catch (err) {
-  //         console.error("Error during user sync or JWT fetch:", err);
-  //       }
-  //     } else {
-  //       setUser(null);
-  //       localStorage.removeItem("access-token");
-  //     }
-  //     setLoading(false);
-  //   });
-
-  //   return () => unsubscribe();
-  // }, [isLoggedIn]);
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setLoading(true);
@@ -77,13 +38,6 @@ export const AuthProvider = ({ children }) => {
             displayName: currentUser.displayName || 'Anonymous',
             email: currentUser.email,
             photoURL: currentUser.photoURL || '',
-            role:
-              currentUser.email === "shorifuzzamansoil2020@gmail.com"
-                ? "admin"
-                : currentUser.email === "22203037@iubat.edu"
-                  ? "moderator"
-                  : "general",
-
           };
 
           await axios.post('http://localhost:5000/users', userData, {
@@ -139,8 +93,37 @@ export const AuthProvider = ({ children }) => {
   const logOut = () => {
     setLoading(true);
     setIsLoggedIn(false);
-    localStorage.removeItem("access-token");
+    localStorage.removeItem('access-token');
     return signOut(auth);
+  };
+
+  // ✅ New function to update role
+  const updateUserRole = async (email, newRole) => {
+    try {
+      const token = localStorage.getItem('access-token');
+
+      await axios.patch(
+        `http://localhost:5000/users/${email}/role`,
+        { role: newRole },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      // Refresh user data after role update
+      const userRes = await axios.get(`http://localhost:5000/users/${email}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setUser(userRes.data); // ✅ Update context
+    } catch (err) {
+      console.error('Failed to update user role:', err);
+    }
   };
 
   return (
@@ -155,6 +138,7 @@ export const AuthProvider = ({ children }) => {
         signIn,
         googleLogin,
         logOut,
+        updateUserRole, // ✅ exposed to context
       }}
     >
       {children}

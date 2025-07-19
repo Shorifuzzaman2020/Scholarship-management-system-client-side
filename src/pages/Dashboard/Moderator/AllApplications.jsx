@@ -163,13 +163,6 @@ const AllApplications = () => {
                       Feedback
                     </button>
 
-                    {/* <button
-                      className="btn btn-xs btn-error"
-                      onClick={() => handleCancel(app._id)}
-                    >
-                      Cancel
-                    </button> */}
-
                     {status === "pending" && (
                       <>
                         <button

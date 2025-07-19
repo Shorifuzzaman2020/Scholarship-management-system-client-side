@@ -46,6 +46,7 @@ import AdminAnalytics from "../pages/Dashboard/Admin/AdminAnalytics";
 import ScholarshipDetails from "../pages/ScholarshipDetails/ScholarshipDetails";
 import AllScholarships from "../pages/AllScholarships/AllScholarships";
 import ApplyScholarship from "../pages/Apply/ApplyScholarship";
+import AnalyticsPage from "../pages/Dashboard/Admin/AnalyticsPage";
 
 const router = createBrowserRouter([
   {
@@ -112,7 +113,7 @@ const router = createBrowserRouter([
           { path: "manage-applications", element: <AdminManageApplication /> },
           { path: "manage-users", element: <ManageUsers /> },
           { path: "manage-reviews", element: <AdminManageReview /> },
-          { path: "analytics", element: <AdminAnalytics /> }
+          { path: "analytics", element: <AnalyticsPage/> }
         ]
       }
     ]
