@@ -54,7 +54,7 @@ const MyApplications = () => {
 
     try {
       const reviewData = {
-        scholarshipId: selectedAppId,
+        scholarshipId: selectedAppId.toString(),
         userEmail: user?.email,
         reviewerImage: user?.photoURL,
         reviewerName: user?.displayName,
