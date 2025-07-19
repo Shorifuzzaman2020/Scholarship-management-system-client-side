@@ -64,11 +64,6 @@ const ScholarshipDetails = () => {
           Apply Scholarship
         </Link>
       </div>
-
-      <div className="mt-10">
-        <h3 className="text-xl font-semibold mb-4">Student Reviews</h3>
-        <ReviewSlider scholarshipId={id} />
-      </div>
     </div>
   );
 };

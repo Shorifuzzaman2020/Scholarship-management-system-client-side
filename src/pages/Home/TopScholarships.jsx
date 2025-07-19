@@ -16,7 +16,7 @@ const TopScholarships = () => {
   if (isLoading) return <p className="text-center">Loading...</p>;
 
   return (
-    <div className="my-10 max-w-6xl mx-auto px-4">
+    <div className="my-10 max-w-6xl mt-10 mx-auto px-4">
       <h2 className="text-2xl font-semibold mb-4">🎯 Top Scholarships</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {scholarships.map((s) => (
