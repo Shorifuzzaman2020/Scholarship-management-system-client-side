@@ -98,8 +98,8 @@ const Navbar = () => {
                     </div>
                 ) : (
                     <>
-                        <Link to="/login" className="bg-white text-black p-2 rounded hover:bg-blue-700">Login</Link>
-                        <Link to="/register" className="bg-white text-black p-2 rounded hover:bg-blue-700">Register</Link>
+                        <Link to="/login" className="bg-white text-black p-2 rounded hover:bg-yellow-400">Login</Link>
+                        <Link to="/register" className="bg-white text-black p-2 rounded hover:bg-yellow-400">Register</Link>
                     </>
                 )}
             </div>

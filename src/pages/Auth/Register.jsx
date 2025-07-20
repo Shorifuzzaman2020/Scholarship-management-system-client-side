@@ -93,7 +93,7 @@ const Register = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-blue-600 text-white p-6">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-green-200 text-white p-6">
             <div className="bg-white text-black p-8 rounded-lg shadow-md w-full max-w-sm">
                 <h2 className="text-2xl font-bold text-center mb-4">Register</h2>
                 {error && <p className="text-red-500 text-sm text-center">{error}</p>}
@@ -148,14 +148,14 @@ const Register = () => {
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
+                        className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-700"
                     >
                         Register
                     </button>
                 </form>
                 <p className="text-center mt-4 text-gray-600">
                     Already have an account?{" "}
-                    <a href="/login" className="text-blue-500 hover:underline">
+                    <a href="/login" className="text-green-500 hover:underline">
                         Login
                     </a>
                 </p>

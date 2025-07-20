@@ -70,7 +70,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-600 text-white p-6">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-green-200 text-white p-6">
       <div className="bg-white text-black p-8 rounded-lg shadow-md w-full max-w-sm">
         <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
@@ -106,14 +106,14 @@ const Login = () => {
           <div className="text-right">
             <Link
               to="/forgot-password"
-              className="text-sm text-blue-600 hover:underline"
+              className="text-sm text-green-600 hover:underline"
             >
               Forgot Password?
             </Link>
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
+            className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-700"
           >
             Login
           </button>
@@ -127,7 +127,7 @@ const Login = () => {
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
             Don't have an account?{" "}
-            <Link to="/register" className="text-blue-600 hover:underline">
+            <Link to="/register" className="text-green-600 hover:underline">
               Register here
             </Link>
           </p>
