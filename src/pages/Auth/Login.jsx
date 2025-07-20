@@ -62,7 +62,7 @@ const Login = () => {
       localStorage.setItem("access-token", jwtRes.data.token);
 
       setIsLoggedIn(true);
-      navigate("/my-recipes");
+      navigate("/");
     } catch (err) {
       console.error("Google login error:", err);
       setError("Google login failed.");
