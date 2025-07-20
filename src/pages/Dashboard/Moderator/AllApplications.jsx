@@ -103,17 +103,7 @@ const AllApplications = () => {
           <option>Pending</option>
           <option>Processing</option>
           <option>Completed</option>
-          <option>Approved</option>
           <option>Rejected</option>
-        </select>
-
-        <select
-          className="select select-bordered"
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          <option>Newest</option>
-          <option>Oldest</option>
         </select>
       </div>
 
