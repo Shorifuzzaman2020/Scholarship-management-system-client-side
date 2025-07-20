@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
@@ -102,17 +103,7 @@ const AdminManageApplication = () => {
           <option>Pending</option>
           <option>Processing</option>
           <option>Completed</option>
-          <option>Approved</option>
           <option>Rejected</option>
-        </select>
-
-        <select
-          className="select select-bordered"
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          <option>Newest</option>
-          <option>Oldest</option>
         </select>
       </div>
 
@@ -133,7 +124,7 @@ const AdminManageApplication = () => {
               return (
                 <tr key={app._id}>
                   <td>{app.universityName}</td>
-                  <td>{app.appliedDegree}</td>
+                  <td>{app.degree}</td>
                   <td>{app.subjectCategory}</td>
                   <td>
                     <span className={`badge ${getStatusBadge(status)}`}>
@@ -165,9 +156,21 @@ const AdminManageApplication = () => {
                       <>
                         <button
                           className="btn btn-xs btn-outline btn-success"
-                          onClick={() => handleStatusUpdate(app._id, "Approved")}
+                          onClick={() => handleStatusUpdate(app._id, "Processing")}
                         >
-                          Approve
+                          Processing
+                        </button>
+
+                      </>
+                    )}
+
+                    {status === "processing" && (
+                      <>
+                        <button
+                          className="btn btn-xs btn-outline btn-success"
+                          onClick={() => handleStatusUpdate(app._id, "Completed")}
+                        >
+                          Completed
                         </button>
                         <button
                           className="btn btn-xs btn-outline btn-error"
@@ -176,15 +179,7 @@ const AdminManageApplication = () => {
                           Reject
                         </button>
                       </>
-                    )}
 
-                    {status === "processing" && (
-                      <button
-                        className="btn btn-xs btn-outline btn-success"
-                        onClick={() => handleStatusUpdate(app._id, "Completed")}
-                      >
-                        Mark Completed
-                      </button>
                     )}
                   </td>
                 </tr>
@@ -207,7 +202,7 @@ const AdminManageApplication = () => {
               <p><strong>HSC Result:</strong> {selectedApp.hscResult}</p>
               <p><strong>Study Gap:</strong> {selectedApp.studyGap}</p>
               <p><strong>Apply Date:</strong> {selectedApp.applyDate}</p>
-              
+
             </div>
           )}
           <div className="modal-action">
