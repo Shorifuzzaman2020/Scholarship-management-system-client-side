@@ -1,6 +1,5 @@
 
 
-
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
@@ -135,7 +134,7 @@ const AllApplications = () => {
               return (
                 <tr key={app._id}>
                   <td>{app.universityName}</td>
-                  <td>{app.appliedDegree}</td>
+                  <td>{app.degree}</td>
                   <td>{app.subjectCategory}</td>
                   <td>
                     <span className={`badge ${getStatusBadge(status)}`}>
@@ -167,9 +166,21 @@ const AllApplications = () => {
                       <>
                         <button
                           className="btn btn-xs btn-outline btn-success"
-                          onClick={() => handleStatusUpdate(app._id, "Approved")}
+                          onClick={() => handleStatusUpdate(app._id, "Processing")}
                         >
-                          Approve
+                          Processing
+                        </button>
+
+                      </>
+                    )}
+
+                    {status === "processing" && (
+                      <>
+                        <button
+                          className="btn btn-xs btn-outline btn-success"
+                          onClick={() => handleStatusUpdate(app._id, "Completed")}
+                        >
+                          Completed
                         </button>
                         <button
                           className="btn btn-xs btn-outline btn-error"
@@ -178,15 +189,7 @@ const AllApplications = () => {
                           Reject
                         </button>
                       </>
-                    )}
 
-                    {status === "processing" && (
-                      <button
-                        className="btn btn-xs btn-outline btn-success"
-                        onClick={() => handleStatusUpdate(app._id, "Completed")}
-                      >
-                        Mark Completed
-                      </button>
                     )}
                   </td>
                 </tr>
@@ -209,7 +212,7 @@ const AllApplications = () => {
               <p><strong>HSC Result:</strong> {selectedApp.hscResult}</p>
               <p><strong>Study Gap:</strong> {selectedApp.studyGap}</p>
               <p><strong>Apply Date:</strong> {selectedApp.applyDate}</p>
-              
+
             </div>
           )}
           <div className="modal-action">
