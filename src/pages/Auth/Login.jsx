@@ -40,7 +40,7 @@ const Login = () => {
       localStorage.setItem("access-token", jwtRes.data.token);
 
       setIsLoggedIn(true);
-      navigate("/my-recipes");
+      navigate("/");
     } catch (err) {
       console.error("Login error:", err);
       setError("Invalid email or password.");

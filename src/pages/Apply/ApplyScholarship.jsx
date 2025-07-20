@@ -99,6 +99,7 @@ const CheckoutForm = ({ scholarship,user }) => {
         applyDate: new Date().toISOString(),
         status: "pending",
         paymentStatus: "paid",
+        applicationFees: scholarship.applicationFees
       };
 
       try {
