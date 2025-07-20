@@ -48,7 +48,7 @@ const TopScholarships = () => {
         ))}
       </div>
       <div className="text-center mt-5">
-        <Link to="/scholarships" className="btn btn-primary">
+        <Link to="/scholarships" className="btn bg-green-500 text-white">
           See All Scholarships
         </Link>
       </div>

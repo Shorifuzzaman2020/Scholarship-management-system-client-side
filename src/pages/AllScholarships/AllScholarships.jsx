@@ -89,7 +89,7 @@ const AllScholarships = () => {
               {/* ✅ See Details Button */}
               <Link
                 to={`/scholarships/${sch._id}`}
-                className="mt-auto bg-blue-600 text-white text-center py-1 px-3 rounded hover:bg-blue-700 transition"
+                className="mt-auto bg-green-600 text-white text-center py-1 px-3 rounded hover:bg-green-700 transition"
               >
                 See Details
               </Link>
