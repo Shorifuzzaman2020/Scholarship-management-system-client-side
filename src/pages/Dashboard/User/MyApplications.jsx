@@ -3,13 +3,28 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { useUser } from "../../../contexts/AuthProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axiosSecure from "../../../../utils/axiosSecure";
+import axios from "axios";
 
 const MyApplications = () => {
   const { user } = useUser();
-  const [selectedAppId, setSelectedAppId] = useState(null);
+  const [selectedScholarshipId, setSelectedScholarshipId] = useState(null);
   const [reviewText, setReviewText] = useState("");
+  const [scholarships, setScholarships] = useState([]);
+
+  useEffect(() => {
+    const fetchScholarships = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/scholarships`);
+        setScholarships(res.data);
+      } catch (error) {
+        console.error("Failed to fetch scholarships:", error);
+      }
+    };
+
+    fetchScholarships();
+  }, []);
 
   const { data: apps = [], refetch } = useQuery({
     queryKey: ["my-applications", user?.email],
@@ -40,8 +55,18 @@ const MyApplications = () => {
     }
   };
 
-  const openReviewModal = (id) => {
-    setSelectedAppId(id);
+  const openReviewModal = (app) => {
+    // Find the scholarship in scholarships array using scholarshipId from application
+    const matchedScholarship = scholarships.find(
+      (s) => s._id === app.scholarshipId
+    );
+
+    if (matchedScholarship) {
+      setSelectedScholarshipId(matchedScholarship._id);
+    } else {
+      setSelectedScholarshipId(null);
+    }
+
     setReviewText("");
     document.getElementById("review_modal").showModal();
   };
@@ -52,9 +77,14 @@ const MyApplications = () => {
       return;
     }
 
+    if (!selectedScholarshipId) {
+      Swal.fire("Error", "Scholarship not found for this application.", "error");
+      return;
+    }
+
     try {
       const reviewData = {
-        scholarshipId: selectedAppId.toString(),
+        scholarshipId: selectedScholarshipId,   // Now from scholarships array (_id)
         userEmail: user?.email,
         reviewerImage: user?.photoURL,
         reviewerName: user?.displayName,
@@ -110,7 +140,7 @@ const MyApplications = () => {
                   </button>
                   <button
                     className="btn btn-xs btn-primary"
-                    onClick={() => openReviewModal(app._id)}
+                    onClick={() => openReviewModal(app)}
                   >
                     Review
                   </button>
