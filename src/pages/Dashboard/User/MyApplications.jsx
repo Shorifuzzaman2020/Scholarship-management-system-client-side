@@ -13,6 +13,9 @@ const MyApplications = () => {
   const [reviewText, setReviewText] = useState("");
   const [scholarships, setScholarships] = useState([]);
 
+  const [editApplication, setEditApplication] = useState(null);
+  const [editedFields, setEditedFields] = useState({});
+
   useEffect(() => {
     const fetchScholarships = async () => {
       try {
@@ -56,7 +59,6 @@ const MyApplications = () => {
   };
 
   const openReviewModal = (app) => {
-    // Find the scholarship in scholarships array using scholarshipId from application
     const matchedScholarship = scholarships.find(
       (s) => s._id === app.scholarshipId
     );
@@ -84,7 +86,7 @@ const MyApplications = () => {
 
     try {
       const reviewData = {
-        scholarshipId: selectedScholarshipId,   // Now from scholarships array (_id)
+        scholarshipId: selectedScholarshipId,
         userEmail: user?.email,
         reviewerImage: user?.photoURL,
         reviewerName: user?.displayName,
@@ -103,6 +105,42 @@ const MyApplications = () => {
       }
     } catch (error) {
       Swal.fire("Error", "Failed to submit review", "error");
+    }
+  };
+
+  const openEditModal = (app) => {
+    setEditApplication(app);
+    setEditedFields({
+      universityName: app.universityName,
+      subjectCategory: app.subjectCategory,
+      degree: app.degree,
+      applicationFees: app.applicationFees
+    });
+    document.getElementById("edit_modal").showModal();
+  };
+
+  const handleEditSubmit = async () => {
+    if (!editApplication) return;
+
+    try {
+      const res = await fetch(`http://localhost:5000/applications/${editApplication._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(editedFields),
+      });
+
+      const data = await res.json();
+
+      if (data.modifiedCount > 0 || data.matchedCount > 0) {
+        Swal.fire("Success", "Application updated successfully.", "success");
+        document.getElementById("edit_modal").close();
+        refetch();
+      } else {
+        Swal.fire("No Changes", "No changes were made.", "info");
+      }
+
+    } catch (error) {
+      Swal.fire("Error", "Failed to update application.", "error");
     }
   };
 
@@ -150,11 +188,23 @@ const MyApplications = () => {
                   >
                     Review
                   </button>
+                  <button
+                    className="btn btn-xs btn-warning"
+                    onClick={() => {
+                      if (app.status === "pending") {
+                        window.location.href = `edit-application/${app._id}`;
+                      } else {
+                        Swal.fire("Not Allowed", "You can edit only pending applications.", "info");
+                      }
+                    }}
+                  >
+                    Edit
+                  </button>
+
                 </td>
               </tr>
             ))}
           </tbody>
-
         </table>
       </div>
 
@@ -178,6 +228,58 @@ const MyApplications = () => {
                 onClick={handleReviewSubmit}
               >
                 Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+
+      {/* Edit Modal */}
+      <dialog id="edit_modal" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg mb-4">Edit Application</h3>
+
+          <input
+            type="text"
+            className="input input-bordered w-full mb-2"
+            value={editedFields.universityName || ""}
+            onChange={(e) => setEditedFields({ ...editedFields, universityName: e.target.value })}
+            placeholder="University Name"
+          />
+
+          <input
+            type="text"
+            className="input input-bordered w-full mb-2"
+            value={editedFields.subjectCategory || ""}
+            onChange={(e) => setEditedFields({ ...editedFields, subjectCategory: e.target.value })}
+            placeholder="Subject Category"
+          />
+
+          <input
+            type="text"
+            className="input input-bordered w-full mb-2"
+            value={editedFields.degree || ""}
+            onChange={(e) => setEditedFields({ ...editedFields, degree: e.target.value })}
+            placeholder="Degree"
+          />
+
+          <input
+            type="number"
+            className="input input-bordered w-full mb-4"
+            value={editedFields.applicationFees || ""}
+            onChange={(e) => setEditedFields({ ...editedFields, applicationFees: parseFloat(e.target.value) })}
+            placeholder="Application Fees"
+          />
+
+          <div className="modal-action">
+            <form method="dialog" className="flex gap-2">
+              <button className="btn btn-outline">Cancel</button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleEditSubmit}
+              >
+                Save Changes
               </button>
             </form>
           </div>

@@ -48,6 +48,7 @@ import AllScholarships from "../pages/AllScholarships/AllScholarships";
 import ApplyScholarship from "../pages/Apply/ApplyScholarship";
 import AnalyticsPage from "../pages/Dashboard/Admin/AnalyticsPage";
 import OfficeAddress from "../pages/Home/OfficeAddress";
+import EditApplication from "../pages/Apply/EditApplication";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,7 @@ const router = createBrowserRouter([
           { path: "my-applications", element: <MyApplications /> },
           { path: "my-reviews", element: <MyReviews /> },
           { path: "apply/:id", element: <ApplyScholarship /> },
+          {path:"edit-application/:id", element: <EditApplication/>}
         ]
       }
     ]
