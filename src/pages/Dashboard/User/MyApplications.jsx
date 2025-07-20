@@ -134,7 +134,13 @@ const MyApplications = () => {
                 <td className="flex gap-2">
                   <button
                     className="btn btn-xs btn-outline"
-                    onClick={() => handleCancel(app._id)}
+                    onClick={() => {
+                      if (app.status !== "Processing" && app.status !== "Completed") {
+                        handleCancel(app._id);
+                      } else {
+                        Swal.fire("Error", "Failed to cancel, application is processing", "error");
+                      }
+                    }}
                   >
                     Cancel
                   </button>
@@ -148,6 +154,7 @@ const MyApplications = () => {
               </tr>
             ))}
           </tbody>
+
         </table>
       </div>
 
