@@ -1,5 +1,4 @@
 
-
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { useState, useRef } from "react";
@@ -7,6 +6,7 @@ import { useState, useRef } from "react";
 const ManageScholarships = () => {
   const [selectedScholarship, setSelectedScholarship] = useState(null);
   const modalRef = useRef(null);
+  const detailsModalRef = useRef(null);  // Reference for the details modal
 
   const { data: scholarships = [], refetch, isLoading } = useQuery({
     queryKey: ["manage-scholarships"],
@@ -42,6 +42,11 @@ const ManageScholarships = () => {
     modalRef.current.showModal();
   };
 
+  const openDetailsModal = (scholarship) => {
+    setSelectedScholarship(scholarship);
+    detailsModalRef.current.showModal(); // Show the details modal
+  };
+
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -49,7 +54,6 @@ const ManageScholarships = () => {
       scholarshipName: form.name.value,
       applicationFees: parseFloat(form.fees.value),
       degree: form.degree.value,
-      
     };
 
     const res = await fetch(`http://localhost:5000/scholarships/${selectedScholarship._id}`, {
@@ -106,6 +110,12 @@ const ManageScholarships = () => {
                       onClick={() => handleDelete(s._id)}
                     >
                       ❌ Delete
+                    </button>
+                    <button
+                      className="btn btn-xs btn-primary"
+                      onClick={() => openDetailsModal(s)} // Open details modal
+                    >
+                      🧐 Details
                     </button>
                   </td>
                 </tr>
@@ -164,6 +174,36 @@ const ManageScholarships = () => {
                 </button>
               </div>
             </form>
+          )}
+        </div>
+      </dialog>
+
+      {/* 📋 Details Modal */}
+      <dialog ref={detailsModalRef} className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg mb-4">Scholarship Details</h3>
+
+          {selectedScholarship && (
+            <div>
+              <p><strong>Scholarship Name:</strong> {selectedScholarship.scholarshipName}</p>
+              <p><strong>University:</strong> {selectedScholarship.universityName}</p>
+              <p><strong>Country:</strong> {selectedScholarship.universityCountry}</p>
+              <p><strong>World Ranking:</strong> {selectedScholarship.worldRank}</p>
+              <p><strong>Tution Fees:</strong> {selectedScholarship.tuitionFees}</p>
+              <p><strong>Scholarship Category:</strong> {selectedScholarship.scholarshipCategory}</p>
+              <p><strong>Subject:</strong> {selectedScholarship.subjectCategory}</p>
+              <p><strong>Degree:</strong> {selectedScholarship.degree}</p>
+              <p><strong>Application Fees:</strong> ${selectedScholarship.applicationFees}</p>
+              <div className="modal-action">
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={() => detailsModalRef.current.close()}
+                >
+                  ❌ Close
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </dialog>

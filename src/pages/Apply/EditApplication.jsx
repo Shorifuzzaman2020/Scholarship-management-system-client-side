@@ -35,7 +35,7 @@ const EditApplication = () => {
     try {
       await axios.put(`http://localhost:5000/applications/${id}`, data);
       Swal.fire("Updated!", "Your application has been updated.", "success");
-      navigate("/dashboard/user/my-scholarships");
+      navigate("/dashboard/user/my-applications");
     } catch (err) {
       toast.error("Failed to update application");
     }

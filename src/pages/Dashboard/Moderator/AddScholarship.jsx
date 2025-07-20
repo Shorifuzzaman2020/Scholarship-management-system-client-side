@@ -158,7 +158,7 @@ const AddScholarship = () => {
         <div>
           <label className="block text-sm font-medium mb-1">Upload University Logo</label>
           <input type="file" accept="image/*" onChange={handleImageUpload} className="input" />
-          {uploading && <p className="text-sm text-blue-500 mt-1">Uploading image...</p>}
+          {uploading && <p className="text-sm text-green-500 mt-1">Uploading image...</p>}
           {formData.universityImage && !uploading && (
             <img src={formData.universityImage} alt="University Logo" className="w-24 h-24 mt-2 object-contain" />
           )}
@@ -167,7 +167,7 @@ const AddScholarship = () => {
         <button
           type="submit"
           disabled={uploading}
-          className={`bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg font-semibold ${
+          className={`bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-lg font-semibold ${
             uploading ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >

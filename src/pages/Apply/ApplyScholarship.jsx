@@ -105,7 +105,7 @@ const CheckoutForm = ({ scholarship,user }) => {
       try {
         await axios.post("http://localhost:5000/applications", applicationData);
         Swal.fire("Success", "Scholarship applied successfully!", "success");
-        navigate("/dashboard/user/my-scholarships");
+        navigate("/dashboard/user/my-applications");
       } catch (err) {
         toast.error("Application submission failed!");
       }

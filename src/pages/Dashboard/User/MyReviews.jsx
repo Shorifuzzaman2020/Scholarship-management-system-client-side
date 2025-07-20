@@ -98,50 +98,52 @@ const MyReviews = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">⭐ My Reviews</h2>
-      {reviews.length === 0 ? (
-        <p>No reviews found.</p>
-      ) : (
-        <table className="table table-zebra w-full">
-          <thead>
-            <tr>
-              <th>Scholarship Name</th>
-              <th>University Name</th>
-              <th>Comments</th>
-              <th>Rating</th>
-              <th>Review Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reviews.map((r) => {
-              const { name, university } = getScholarshipDetails(r.scholarshipId);
-              return (
-                <tr key={r._id}>
-                  <td>{name}</td>
-                  <td>{university}</td>
-                  <td>{r.reviewText || "—"}</td>
-                  <td>{r.rating || "—"}</td>
-                  <td>{formatDate(r.reviewDate)}</td>
-                  <td className="flex gap-2">
-                    <button
-                      className="btn btn-xs btn-outline btn-error"
-                      onClick={() => handleDelete(r._id)}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      className="btn btn-xs btn-outline btn-info"
-                      onClick={() => setEditReview(r)}
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
+      <div className="overflow-x-auto">
+        {reviews.length === 0 ? (
+          <p>No reviews found.</p>
+        ) : (
+          <table className="table table-zebra w-full">
+            <thead>
+              <tr>
+                <th>Scholarship Name</th>
+                <th>University Name</th>
+                <th>Comments</th>
+                <th>Rating</th>
+                <th>Review Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reviews.map((r) => {
+                const { name, university } = getScholarshipDetails(r.scholarshipId);
+                return (
+                  <tr key={r._id}>
+                    <td>{name}</td>
+                    <td>{university}</td>
+                    <td>{r.reviewText || "—"}</td>
+                    <td>{r.rating || "—"}</td>
+                    <td>{formatDate(r.reviewDate)}</td>
+                    <td className="flex gap-2">
+                      <button
+                        className="btn btn-xs btn-outline btn-error"
+                        onClick={() => handleDelete(r._id)}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        className="btn btn-xs btn-outline btn-info"
+                        onClick={() => setEditReview(r)}
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
+      </div>
 
       {/* Edit Modal */}
       {editReview && (
