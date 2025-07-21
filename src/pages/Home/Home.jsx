@@ -9,7 +9,6 @@ const Home = () => {
     <div>
       <Banner />
       <TopScholarships />
-      <Testimonials />
       <StudyTips />
       <FaqSection/>
     </div>
