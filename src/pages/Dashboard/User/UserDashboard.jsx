@@ -11,7 +11,7 @@ const UserDashboard = () => {
   return (
     <div className="flex flex-col md:flex-row">
       <aside className="bg-base-200 p-4 md:w-64">
-        <nav className="flex flex-col items-center justify-center gap-3">
+        <nav className="flex flex-col items-start justify-center gap-3">
           <NavLink to="/dashboard/user/profile" className={navLinkClass}>
             👤 My Profile
           </NavLink>
