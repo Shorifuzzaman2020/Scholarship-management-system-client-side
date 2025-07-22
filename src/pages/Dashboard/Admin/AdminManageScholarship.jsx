@@ -12,7 +12,7 @@ const AdminManageScholarship = () => {
   const { data: scholarships = [], refetch, isLoading } = useQuery({
     queryKey: ["manage-scholarships"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/scholarships");
+      const res = await fetch("https://scholarship-server-liard.vercel.app/scholarships");
       return res.json();
     },
   });
@@ -27,7 +27,7 @@ const AdminManageScholarship = () => {
     });
 
     if (confirm.isConfirmed) {
-      const res = await fetch(`http://localhost:5000/scholarships/${id}`, {
+      const res = await fetch(`https://scholarship-server-liard.vercel.app/scholarships/${id}`, {
         method: "DELETE",
       });
       const result = await res.json();
@@ -57,7 +57,7 @@ const AdminManageScholarship = () => {
       degree: form.degree.value,
     };
 
-    const res = await fetch(`http://localhost:5000/scholarships/${selectedScholarship._id}`, {
+    const res = await fetch(`https://scholarship-server-liard.vercel.app/scholarships/${selectedScholarship._id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedData),

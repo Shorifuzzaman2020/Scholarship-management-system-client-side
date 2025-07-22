@@ -7,7 +7,7 @@ import { useUser } from '../contexts/AuthProvider';
 import { auth } from '../firebase/firebase.init';
 
 const Navbar = () => {
-    const { user, setUser,isLoggedIn } = useUser();
+    const { user, setUser, isLoggedIn } = useUser();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -70,7 +70,7 @@ const Navbar = () => {
                 <Link to="/scholarships" className={`${isActive('/scholarships') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}>
                     All Scholarship
                 </Link>
-                
+
             </div>
 
             {/* Desktop Right Section */}
@@ -107,31 +107,54 @@ const Navbar = () => {
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
                 <div className="lg:hidden absolute top-16 left-0 w-full bg-blue-600 text-white p-4 z-50 shadow-lg">
-                    <div className="space-y-4">
-                        <Link
-                            to="/"
-                            className={`block text-left ${isActive('/') ? 'text-yellow-300 font-semibold' : 'hover:underline'} block`}
-                        >
-                            Home
-                        </Link>
-                        <button
-                            onClick={() => handleRedirect('/scholarships')}
-                            className={`${isActive('/scholarships') ? 'text-yellow-300 font-semibold' : 'hover:underline'} block`}
-                        >
-                            All Scholarship
-                        </button>
-                        
-                        {!user && (
+                    <div className="space-y-4 text-left">
+                        {user && isLoggedIn ? (
                             <>
                                 <Link
+                                    to="/"
+                                    className={`block ${isActive('/') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}
+                                >
+                                    Home
+                                </Link>
+
+                                <button
+                                    onClick={() => handleRedirect('/scholarships')}
+                                    className={`block ${isActive('/scholarships') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}
+                                >
+                                    All Scholarship
+                                </button>
+
+                                <button
+                                    onClick={handleLogout}
+                                    className="bg-red-500 text-white p-2 rounded hover:bg-red-700 w-full text-left"
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <Link
+                                    to="/"
+                                    className={`block ${isActive('/') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}
+                                >
+                                    Home
+                                </Link>
+
+                                <button
+                                    onClick={() => handleRedirect('/scholarships')}
+                                    className={`block ${isActive('/scholarships') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}
+                                >
+                                    All Scholarship
+                                </button>
+                                <Link
                                     to="/login"
-                                    className="block w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
+                                    className="block w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700 text-center"
                                 >
                                     Login
                                 </Link>
                                 <Link
                                     to="/register"
-                                    className="block w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
+                                    className="block w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700 text-center"
                                 >
                                     Register
                                 </Link>
@@ -140,7 +163,8 @@ const Navbar = () => {
                     </div>
                 </div>
             )}
-        </nav>
+
+        </nav >
     );
 };
 

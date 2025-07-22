@@ -7,7 +7,7 @@ const ManageUsers = () => {
   const { data: usersData = {}, refetch, isLoading, isError } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/users");
+      const res = await fetch("https://scholarship-server-liard.vercel.app/users");
       return res.json();
     },
   });
@@ -17,7 +17,7 @@ const ManageUsers = () => {
   const handleRoleChange = async (email, newRole) => {
     try {
       const encodedEmail = encodeURIComponent(email); // 🚨 IMPORTANT
-      const res = await fetch(`http://localhost:5000/users/${encodedEmail}/role`, {
+      const res = await fetch(`https://scholarship-server-liard.vercel.app/users/${encodedEmail}/role`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role: newRole }),
@@ -49,7 +49,7 @@ const ManageUsers = () => {
     });
 
     if (confirm.isConfirmed) {
-      const res = await fetch(`http://localhost:5000/users/${id}`, {
+      const res = await fetch(`https://scholarship-server-liard.vercel.app/users/${id}`, {
         method: "DELETE",
       });
       const data = await res.json();

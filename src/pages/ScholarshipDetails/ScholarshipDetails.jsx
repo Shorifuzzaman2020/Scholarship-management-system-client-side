@@ -16,7 +16,7 @@ const ScholarshipDetails = () => {
   } = useQuery({
     queryKey: ['scholarship', id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/scholarships/${id}`);
+      const res = await axios.get(`https://scholarship-server-liard.vercel.app/scholarships/${id}`);
       return res.data;
     },
   });

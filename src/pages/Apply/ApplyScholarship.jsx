@@ -36,7 +36,7 @@ const CheckoutForm = ({ scholarship,user }) => {
   useEffect(() => {
     if (scholarship?.applicationFees) {
       axios
-        .post("http://localhost:5000/create-payment-intent", {
+        .post("https://scholarship-server-liard.vercel.app/create-payment-intent", {
           applicationFees: scholarship.applicationFees,
         })
         .then((res) => setClientSecret(res.data.clientSecret))
@@ -103,7 +103,7 @@ const CheckoutForm = ({ scholarship,user }) => {
       };
 
       try {
-        await axios.post("http://localhost:5000/applications", applicationData);
+        await axios.post("https://scholarship-server-liard.vercel.app/applications", applicationData);
         Swal.fire("Success", "Scholarship applied successfully!", "success");
         navigate("/dashboard/user/my-applications");
       } catch (err) {
@@ -159,7 +159,7 @@ const ApplyScholarship = () => {
   const { data: scholarship, isLoading, isError, error } = useQuery({
     queryKey: ["scholarships", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/scholarships/${id}`);
+      const res = await axios.get(`https://scholarship-server-liard.vercel.app/scholarships/${id}`);
       return res.data;
     },
   });

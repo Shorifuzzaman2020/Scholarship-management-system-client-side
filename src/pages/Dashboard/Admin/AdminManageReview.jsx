@@ -6,7 +6,7 @@ const AdminManageReview = () => {
   const { data: reviews = [], refetch } = useQuery({
     queryKey: ["all-reviews"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/reviews");
+      const res = await fetch("https://scholarship-server-liard.vercel.app/reviews");
       return res.json();
     },
   });
@@ -21,7 +21,7 @@ const AdminManageReview = () => {
     });
 
     if (confirm.isConfirmed) {
-      const res = await fetch(`http://localhost:5000/reviews/${id}`, {
+      const res = await fetch(`https://scholarship-server-liard.vercel.app/reviews/${id}`, {
         method: "DELETE",
       });
       const result = await res.json();

@@ -79,7 +79,7 @@ const Register = () => {
 
         try {
             // Save user to DB only
-            await fetch("http://localhost:5000/users", {
+            await fetch("https://scholarship-server-liard.vercel.app/users", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userData),

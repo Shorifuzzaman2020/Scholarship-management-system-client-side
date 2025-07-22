@@ -13,7 +13,7 @@ const AdminProfile = () => {
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem("access-token"); 
-        const res = await axios.get(`http://localhost:5000/users/${authUser?.email}`, {
+        const res = await axios.get(`https://scholarship-server-liard.vercel.app/users/${authUser?.email}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

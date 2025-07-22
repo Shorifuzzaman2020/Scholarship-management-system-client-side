@@ -8,7 +8,7 @@ const TopScholarships = () => {
   const { data: scholarships = [], isLoading } = useQuery({
     queryKey: ["top-scholarships"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/scholarships/top");
+      const res = await axios.get("https://scholarship-server-liard.vercel.app/scholarships/top");
       return res.data;
     },
   });

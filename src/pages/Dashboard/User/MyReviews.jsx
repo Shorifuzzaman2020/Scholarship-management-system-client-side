@@ -13,7 +13,7 @@ const MyReviews = () => {
   useEffect(() => {
     const fetchScholarships = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/scholarships`);
+        const res = await axios.get(`https://scholarship-server-liard.vercel.app/scholarships`);
         setScholarships(res.data);
       } catch (error) {
         console.error("Failed to fetch scholarships:", error);
@@ -26,7 +26,7 @@ const MyReviews = () => {
   const { data: reviews = [], isLoading, isError, refetch } = useQuery({
     queryKey: ["user-reviews", user?.email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/reviews/user/${user?.email}`);
+      const res = await fetch(`https://scholarship-server-liard.vercel.app/reviews/user/${user?.email}`);
       if (!res.ok) throw new Error("Failed to fetch reviews");
       return res.json();
     },
@@ -47,7 +47,7 @@ const MyReviews = () => {
     });
 
     if (confirm.isConfirmed) {
-      const res = await fetch(`http://localhost:5000/reviews/${id}`, {
+      const res = await fetch(`https://scholarship-server-liard.vercel.app/reviews/${id}`, {
         method: "DELETE",
       });
 
@@ -69,7 +69,7 @@ const MyReviews = () => {
       rating: form.rating.value,
     };
 
-    const res = await fetch(`http://localhost:5000/reviews/${editReview._id}`, {
+    const res = await fetch(`https://scholarship-server-liard.vercel.app/reviews/${editReview._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedReview),

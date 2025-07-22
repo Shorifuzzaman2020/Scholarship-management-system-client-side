@@ -21,7 +21,7 @@ const CheckoutForm = ({ user, scholarship }) => {
   });
 
   const getClientSecret = async () => {
-    const res = await axios.post("http://localhost:5000/create-payment-intent", {
+    const res = await axios.post("https://scholarship-server-liard.vercel.app/create-payment-intent", {
       amount: 5000, // $50.00 (5000 cents)
     });
     setClientSecret(res.data.clientSecret);
@@ -57,7 +57,7 @@ const CheckoutForm = ({ user, scholarship }) => {
     };
 
     try {
-      const res = await axios.post("http://localhost:5000/apply-scholarship", applicationData);
+      const res = await axios.post("https://scholarship-server-liard.vercel.app/apply-scholarship", applicationData);
       if (res.data.success) {
         Swal.fire("Success", "Scholarship applied successfully!", "success");
       }

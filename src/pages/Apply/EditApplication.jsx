@@ -14,7 +14,7 @@ const EditApplication = () => {
   const [application, setApplication] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/applications/${id}`)
+    axios.get(`https://scholarship-server-liard.vercel.app/applications/${id}`)
       .then(res => {
         setApplication(res.data);
         reset({
@@ -33,7 +33,7 @@ const EditApplication = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.put(`http://localhost:5000/applications/${id}`, data);
+      await axios.put(`https://scholarship-server-liard.vercel.app/applications/${id}`, data);
       Swal.fire("Updated!", "Your application has been updated.", "success");
       navigate("/dashboard/user/my-applications");
     } catch (err) {

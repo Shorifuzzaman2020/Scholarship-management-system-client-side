@@ -17,7 +17,7 @@ const AllScholarships = () => {
   useEffect(() => {
     const fetchScholarships = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/scholarships");
+        const res = await axios.get("https://scholarship-server-liard.vercel.app/scholarships");
         setScholarships(res.data);
         setFilteredScholarships(res.data);
         setLoading(false);

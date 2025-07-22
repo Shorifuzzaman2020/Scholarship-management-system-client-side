@@ -40,19 +40,19 @@ export const AuthProvider = ({ children }) => {
             photoURL: currentUser.photoURL || '',
           };
 
-          await axios.post('http://localhost:5000/users', userData, {
+          await axios.post('https://scholarship-server-liard.vercel.app/users', userData, {
             headers: { 'Content-Type': 'application/json' },
           });
 
           // Step 2: Get JWT token
-          const jwtRes = await axios.post('http://localhost:5000/jwt', {
+          const jwtRes = await axios.post('https://scholarship-server-liard.vercel.app/jwt', {
             email: currentUser.email,
           });
 
           localStorage.setItem('access-token', jwtRes.data.token);
 
           // Step 3: Fetch the full user from MongoDB
-          const userRes = await axios.get(`http://localhost:5000/users/${currentUser.email}`, {
+          const userRes = await axios.get(`https://scholarship-server-liard.vercel.app/users/${currentUser.email}`, {
             headers: {
               Authorization: `Bearer ${jwtRes.data.token}`,
             },
@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem('access-token');
 
       await axios.patch(
-        `http://localhost:5000/users/${email}/role`,
+        `https://scholarship-server-liard.vercel.app/users/${email}/role`,
         { role: newRole },
         {
           headers: {
@@ -114,7 +114,7 @@ export const AuthProvider = ({ children }) => {
       );
 
       // Refresh user data after role update
-      const userRes = await axios.get(`http://localhost:5000/users/${email}`, {
+      const userRes = await axios.get(`https://scholarship-server-liard.vercel.app/users/${email}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

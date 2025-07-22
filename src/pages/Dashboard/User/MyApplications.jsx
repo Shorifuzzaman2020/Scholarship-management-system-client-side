@@ -20,7 +20,7 @@ const MyApplications = () => {
   useEffect(() => {
     const fetchScholarships = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/scholarships`);
+        const res = await axios.get(`https://scholarship-server-liard.vercel.app/scholarships`);
         setScholarships(res.data);
       } catch (error) {
         console.error("Failed to fetch scholarships:", error);
@@ -124,7 +124,7 @@ const MyApplications = () => {
     if (!editApplication) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/applications/${editApplication._id}`, {
+      const res = await fetch(`https://scholarship-server-liard.vercel.app/applications/${editApplication._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editedFields),

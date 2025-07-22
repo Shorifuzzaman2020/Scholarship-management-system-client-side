@@ -15,7 +15,7 @@ const AdminManageApplication = () => {
   const { data: applications = [], refetch } = useQuery({
     queryKey: ["all-applications"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/applications");
+      const res = await fetch("https://scholarship-server-liard.vercel.app/applications");
       return res.json();
     },
   });
@@ -37,7 +37,7 @@ const AdminManageApplication = () => {
   }, [applications, statusFilter, sortOrder]);
 
   const handleStatusUpdate = async (id, newStatus) => {
-    const res = await fetch(`http://localhost:5000/applications/status/${id}`, {
+    const res = await fetch(`https://scholarship-server-liard.vercel.app/applications/status/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: newStatus }),
@@ -68,7 +68,7 @@ const AdminManageApplication = () => {
     const feedback = e.target.feedback.value;
     const id = selectedApp?._id;
 
-    const res = await fetch(`http://localhost:5000/applications/feedback/${id}`, {
+    const res = await fetch(`https://scholarship-server-liard.vercel.app/applications/feedback/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ feedback }),

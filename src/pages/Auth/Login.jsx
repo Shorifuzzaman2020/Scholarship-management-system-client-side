@@ -34,7 +34,7 @@ const Login = () => {
       const currentUser = userCredential.user;
 
 
-      const jwtRes = await axios.post("http://localhost:5000/jwt", {
+      const jwtRes = await axios.post("https://scholarship-server-liard.vercel.app/jwt", {
         email: currentUser.email,
       });
       localStorage.setItem("access-token", jwtRes.data.token);
@@ -56,7 +56,7 @@ const Login = () => {
 
       // await saveUserToDatabase(currentUser);
 
-      const jwtRes = await axios.post("http://localhost:5000/jwt", {
+      const jwtRes = await axios.post("https://scholarship-server-liard.vercel.app/jwt", {
         email: currentUser.email,
       });
       localStorage.setItem("access-token", jwtRes.data.token);
