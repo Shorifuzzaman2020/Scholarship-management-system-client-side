@@ -106,22 +106,25 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
-                <div className="lg:hidden absolute top-16 left-0 w-full bg-blue-600 text-white p-4 z-50 shadow-lg">
+                <div className="lg:hidden absolute top-16 left-0 w-full bg-green-200 text-white p-4 z-50 shadow-lg">
                     <div className="space-y-4 text-left">
-                        {user && isLoggedIn ? (
-                            <>
-                                <Link
-                                    to="/"
-                                    className={`block ${isActive('/') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}
-                                >
-                                    Home
-                                </Link>
+                        <Link
+                            to="/"
+                            className={`block text-black ${isActive('/') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}
+                        >
+                            Home
+                        </Link>
 
+                        <Link to="/scholarships" className={`block text-black ${isActive('/scholarships') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}>
+                            All Scholarship
+                        </Link>
+                        {user && isLoggedIn ? (
+                            <div className='flex flex-col gap-3'>
                                 <button
-                                    onClick={() => handleRedirect('/scholarships')}
-                                    className={`block ${isActive('/scholarships') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}
+                                    onClick={() => handleRedirect(getDashboardPath())}
+                                    className="bg-white text-green-700 p-2 rounded"
                                 >
-                                    All Scholarship
+                                    {getDashboardLabel()}
                                 </button>
 
                                 <button
@@ -130,31 +133,18 @@ const Navbar = () => {
                                 >
                                     Logout
                                 </button>
-                            </>
+                            </div>
                         ) : (
                             <>
                                 <Link
-                                    to="/"
-                                    className={`block ${isActive('/') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}
-                                >
-                                    Home
-                                </Link>
-
-                                <button
-                                    onClick={() => handleRedirect('/scholarships')}
-                                    className={`block ${isActive('/scholarships') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}
-                                >
-                                    All Scholarship
-                                </button>
-                                <Link
                                     to="/login"
-                                    className="block w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700 text-center"
+                                    className="block w-full bg-green-500 text-white p-2 rounded hover:bg-green-700 text-center"
                                 >
                                     Login
                                 </Link>
                                 <Link
                                     to="/register"
-                                    className="block w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700 text-center"
+                                    className="block w-full bg-green-500 text-white p-2 rounded hover:bg-green-700 text-center"
                                 >
                                     Register
                                 </Link>
