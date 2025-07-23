@@ -4,17 +4,16 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { useUser } from '../contexts/AuthProvider';
-import { auth } from '../firebase/firebase.init';
+
 
 const Navbar = () => {
-    const { user, setUser, isLoggedIn } = useUser();
+    const { user, logOut, isLoggedIn} = useUser();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleLogout = async () => {
         try {
-            await auth.signOut();
-            setUser(null);
+            logOut();
             navigate('/login');
         } catch (err) {
             console.log('Error signing out: ', err.message);
@@ -129,7 +128,7 @@ const Navbar = () => {
 
                                 <button
                                     onClick={handleLogout}
-                                    className="bg-red-500 text-white p-2 rounded hover:bg-red-700 w-full text-left"
+                                    className="bg-red-500 text-white p-2 rounded hover:bg-red-700 w-full text-center"
                                 >
                                     Logout
                                 </button>

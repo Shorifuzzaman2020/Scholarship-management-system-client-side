@@ -18,14 +18,13 @@ import { useUser } from "../../contexts/AuthProvider";
 
 const stripePromise = loadStripe("pk_test_51RlpeqQsYAtU3HBcjajD1vK9Wikk36yRvpq7aKHdAs0WovKoKEqzO5p2o567K2pYswT6aIsJ6YTkZMEuIouHDZIJ00gRasxPVl");
 
-const CheckoutForm = ({ scholarship,user }) => {
+const CheckoutForm = ({ scholarship, user }) => {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
   const [clientSecret, setClientSecret] = useState("");
   const [loading, setLoading] = useState(false);
-
-  
+  const [uploadedImage, setUploadedImage] = useState(null); // State for uploaded image
 
   const {
     register,
@@ -43,6 +42,35 @@ const CheckoutForm = ({ scholarship,user }) => {
         .catch(() => toast.error("Failed to initialize payment."));
     }
   }, [scholarship]);
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const form = new FormData();
+    form.append("image", file);
+
+    const imgbbAPIKey = "fc3b149af4e69041d72248d6085358e9"; // Replace with your actual key
+
+    try {
+      const res = await fetch(
+        `https://api.imgbb.com/1/upload?key=${imgbbAPIKey}`,
+        {
+          method: "POST",
+          body: form,
+        }
+      );
+      const data = await res.json();
+      if (data.success) {
+        setUploadedImage(data.data.url); // Set uploaded image URL
+      } else {
+        Swal.fire("Error!", "Image upload failed!", "error");
+      }
+    } catch (err) {
+      console.error("Upload error:", err);
+      Swal.fire("Error!", "Image upload error!", "error");
+    }
+  };
 
   const onSubmit = async (data) => {
     if (!user) {
@@ -99,7 +127,8 @@ const CheckoutForm = ({ scholarship,user }) => {
         applyDate: new Date().toISOString(),
         status: "pending",
         paymentStatus: "paid",
-        applicationFees: scholarship.applicationFees
+        applicationFees: scholarship.applicationFees,
+        photo: uploadedImage, // Add uploaded image URL to application data
       };
 
       try {
@@ -117,7 +146,7 @@ const CheckoutForm = ({ scholarship,user }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-xl mx-auto">
       <input {...register("phone", { required: true })} placeholder="Phone Number" className="input input-bordered w-full" />
-      <input {...register("photo", { required: true })} placeholder="Photo URL" className="input input-bordered w-full" />
+      
       <input {...register("address", { required: true })} placeholder="Address (village, district, country)" className="input input-bordered w-full" />
       <select {...register("gender", { required: true })} className="select select-bordered w-full">
         <option value="">Select Gender</option>
@@ -143,6 +172,20 @@ const CheckoutForm = ({ scholarship,user }) => {
       <input value={scholarship.universityName} readOnly className="input input-bordered w-full" />
       <input value={scholarship.scholarshipCategory} readOnly className="input input-bordered w-full" />
       <input value={scholarship.subjectCategory} readOnly className="input input-bordered w-full" />
+      
+      {/* Image upload input */}
+      <div>
+        <label className="block text-sm font-medium mb-1">Upload Your Photo</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          className="input input-bordered w-full"
+        />
+        {uploadedImage && (
+          <img src={uploadedImage} alt="Uploaded" className="w-24 h-24 mt-2 object-contain" />
+        )}
+      </div>
 
       <CardElement className="border p-3 rounded-md" />
 
