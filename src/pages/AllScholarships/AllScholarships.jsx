@@ -78,7 +78,7 @@ const AllScholarships = () => {
           <p>No scholarships found.</p>
         ) : (
           currentScholarships.map((sch) => (
-            <div key={sch._id} className="border p-4 rounded shadow-sm flex flex-col justify-between">
+            <div key={sch._id} className="border p-4 rounded shadow-sm flex flex-col justify-between items-start">
               <img
                 src={sch.universityImage}
                 alt={sch.universityName}

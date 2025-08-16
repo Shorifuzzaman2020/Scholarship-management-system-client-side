@@ -48,9 +48,9 @@ const Navbar = () => {
 
     return (
         <nav className="bg-green-700 text-white p-4 flex items-center justify-between relative">
-            <div className="text-xl font-bold flex gap-4">
+            <div className="text-xl font-bold flex gap-2">
                 <div>
-                    <img className='h-8 w-8' src="https://i.ibb.co/0ykxLfXd/student-graduation-cap-with-gold-tassel-ribbon-107791-16542.jpg" alt="" />
+                    <img className='h-6 w-6' src="https://i.ibb.co.com/mCZkjH8W/Untitled-1.jpg" alt="" />
                 </div>
                 <div>
                     <Link to="/">GlobalScholarHub</Link>

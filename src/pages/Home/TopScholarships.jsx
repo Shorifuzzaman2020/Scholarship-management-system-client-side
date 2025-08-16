@@ -28,14 +28,14 @@ const TopScholarships = () => {
                 className="h-40 w-full object-cover"
               />
             </figure>
-            <div className="card-body">
+            <div className="card-body justify-start text-left">
               <h2 className="card-title">{s.universityName}</h2>
               <p>
                 {s.scholarshipCategory} - {s.subjectCategory}
               </p>
               <p>Fees: ${s.applicationFees}</p>
               <p>Deadline: {s.deadline}</p>
-              <div className="card-actions justify-end">
+              <div className="card-actions justify-start">
                 <Link
                   to={`/scholarships/${s._id}`}
                   className="btn btn-outline btn-sm"
