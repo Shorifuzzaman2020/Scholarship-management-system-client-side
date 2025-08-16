@@ -47,7 +47,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-green-700 text-white p-4 flex items-center justify-between relative">
+        <nav className="sticky top-0 z-50 bg-green-700 text-white p-4 flex items-center justify-between relative">
             <div className="text-xl font-bold flex gap-2">
                 <div>
                     <img className='h-6 w-6' src="https://i.ibb.co.com/mCZkjH8W/Untitled-1.jpg" alt="" />
