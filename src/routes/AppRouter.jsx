@@ -49,6 +49,7 @@ import ApplyScholarship from "../pages/Apply/ApplyScholarship";
 import AnalyticsPage from "../pages/Dashboard/Admin/AnalyticsPage";
 import OfficeAddress from "../pages/Home/OfficeAddress";
 import EditApplication from "../pages/Apply/EditApplication";
+import StudentLoanCenter from "../components/Shared/StudentLoanCenter";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
       { path: "/scholarships/:id", element: <PrivateRoute><ScholarshipDetails /></PrivateRoute> },
       { path: "/scholarships", element: <AllScholarships /> },
       {path: "/our-office",element: <OfficeAddress/>},
+      {path: "/loan", element: <StudentLoanCenter/>},
     ]
   },
 

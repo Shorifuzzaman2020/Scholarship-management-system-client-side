@@ -69,6 +69,9 @@ const Navbar = () => {
                 <Link to="/scholarships" className={`${isActive('/scholarships') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}>
                     All Scholarship
                 </Link>
+                <Link to="/loan" className={`${isActive('/loan') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}>
+                    Student Loan Center
+                </Link>
 
             </div>
 
