@@ -7,7 +7,7 @@ import { useUser } from '../contexts/AuthProvider';
 
 
 const Navbar = () => {
-    const { user, logOut, isLoggedIn} = useUser();
+    const { user, logOut, isLoggedIn } = useUser();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -119,6 +119,9 @@ const Navbar = () => {
 
                         <Link to="/scholarships" className={`block text-black ${isActive('/scholarships') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}>
                             All Scholarship
+                        </Link>
+                        <Link to="/loan" className={`block text-black ${isActive('/loan') ? 'text-yellow-300 font-semibold' : 'hover:underline'}`}>
+                            Student Loan Center
                         </Link>
                         {user && isLoggedIn ? (
                             <div className='flex flex-col gap-3'>
