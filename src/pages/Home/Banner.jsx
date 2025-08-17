@@ -19,7 +19,7 @@ const Banner = () => {
       title: "A New Approach to",
       highlight: "Study Of University",
       subtitle: "Apply now for fully funded scholarships and build your future in top universities worldwide!",
-      image: "https://i.ibb.co/chQfHqNV/file-20170602-20599-vxe5co.jpg"
+      image: "https://i.ibb.co.com/5XS3fw5z/pexels-pixabay-267885.webp"
     },
     {
       title: "Explore Global Opportunities",
@@ -31,7 +31,7 @@ const Banner = () => {
       title: "Admissions Open Now!",
       highlight: "Join Top Universities",
       subtitle: "Limited seats, apply early to secure your spot and shape your career.",
-      image: "https://i.ibb.co/tMH4Q7tz/czech-University-Students.jpg"
+      image: "https://i.ibb.co.com/HTMXYr4J/pexels-keira-burton-6147369.webp"
     }
   ];
 
