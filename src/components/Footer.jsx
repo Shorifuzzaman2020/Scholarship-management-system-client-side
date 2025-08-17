@@ -39,10 +39,10 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold text-white mb-2 text-center">Follow Us</h3>
           <div className="flex justify-center space-x-6 mt-2 text-2xl">
-            <a href="#" className="hover:text-green-300"><FaFacebook /></a>
-            <a href="#" className="hover:text-green-300"><FaInstagram /></a>
-            <a href="#" className="hover:text-green-300"><FaTwitter /></a>
-            <a href="#" className="hover:text-green-300"><FaLinkedin /></a>
+            <a href="https://www.facebook.com/md.shorifuzzaman.847390/" className="hover:text-green-300"><FaFacebook /></a>
+            <a href="https://www.instagram.com/m.shorifuzzaman/" className="hover:text-green-300"><FaInstagram /></a>
+            <a href="https://x.com/Shorifuzzaman22" className="hover:text-green-300"><FaTwitter /></a>
+            <a href="https://www.linkedin.com/in/mdshorifuzzaman2020/" className="hover:text-green-300"><FaLinkedin /></a>
           </div>
         </div>
       </div>
