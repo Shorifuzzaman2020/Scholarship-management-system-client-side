@@ -82,7 +82,7 @@ const AllScholarships = () => {
               <img
                 src={sch.universityImage}
                 alt={sch.universityName}
-                className="h-32 w-full object-contain mb-3"
+                className="h-32 w-full object-cover mb-3"
               />
               <h3 className="font-semibold text-lg">{sch.universityName}</h3>
               <p className="text-sm mb-1"><strong>Scholarship:</strong> {sch.scholarshipName}</p>
